@@ -28,5 +28,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  User.associate = function (db) {
+    db.User.hasMany(db.Item, { as: 'Items' });
+    db.User.hasMany(db.Review, { as: 'Reviews', foreignKey: 'receiver_id' });
+    db.User.belongsToMany(db.Swap, { as: 'Swaps', through: 'users_swaps' });
+    db.User.belongsToMany(db.Item, { as: 'LikedItems', through: 'interested_liked' });
+  }
+
   return User;
 }

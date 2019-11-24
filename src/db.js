@@ -33,6 +33,27 @@ db.User = db.sequelize.import(
   require('./models/user')
 );
 
+db.Swap = db.sequelize.import(
+  'swap',
+  require('./models/swap')
+);
+
+db.Message = db.sequelize.import(
+  'message',
+  require('./models/message')
+);
+
+db.Review = db.sequelize.import(
+  'review',
+  require('./models/review')
+);
+
+db.Category = db.sequelize.import(
+  'category',
+  require('./models/category')
+);
+
+
 Object.keys(db).forEach(modelName => {
   if (db[modelName] && db[modelName].associate) {
     db[modelName].associate(db);

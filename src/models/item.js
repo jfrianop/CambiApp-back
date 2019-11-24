@@ -18,19 +18,25 @@ module.exports = (sequelize, DataTypes) => {
         noEmpty: true
       },
       location: {
-        type: DataTypes.ARRAY(DataTypes.DOUBLE),
-        noEmpty: true
+        type: DataTypes.ARRAY(DataTypes.DOUBLE)
       },
       pictures: {
         type: DataTypes.ARRAY(DataTypes.STRING)
       },
     },
     {
-      tableName: 'ingredients',
+      tableName: 'items',
       timestamps: true,
       underscore: true,
     }
   );
+
+  Item.associate = function (db) {
+    db.Item.belongsTo(db.User, { as: 'Owner' });
+    db.Item.belongsToMany(db.User, { as: 'InterestedUsers', through: 'interested_liked' });
+    db.Item.belongsToMany(db.Category, { as: 'Categories', through: 'item_categories' });
+    db.Item.belongsToMany(db.Swap, { as: 'Swaps', through: 'items_swaps' });
+  }
 
   return Item;
 }
