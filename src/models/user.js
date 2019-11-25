@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: 'users',
       timestamps: true,
-      underscore: true,
       defaultScope: {
         attributes: { exclude: ['password'] }
       },

@@ -10,7 +10,7 @@ module.exports = {
       });
     }
 
-    req.userId = jwt.verify(token, process.env.SECRET);
+    res.locals.userId = jwt.verify(token, process.env.SECRET);
 
     next();
   },

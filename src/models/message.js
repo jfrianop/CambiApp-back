@@ -17,13 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: 'messages',
       timestamps: true,
-      underscore: true,
     }
   );
 
   Message.associate = function (db) {
     db.Message.belongsTo(db.User, { as: 'Sender' });
-    db.Message.belongsTo(db.User, { as: 'Swap' });
+    db.Message.belongsTo(db.Swap, { as: 'Swap' });
   }
 
   return Message;

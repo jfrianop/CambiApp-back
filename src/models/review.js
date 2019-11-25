@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: 'reviews',
       timestamps: true,
-      underscore: true,
     }
   );
 

@@ -30,7 +30,7 @@ module.exports = {
   async update(req, res) {
     try {
       const item = await Item.findByPk(req.params.id);
-      //update object item based on req
+      item = { ...item, ...req.body.item }
       const updatedItem = await item.save();
       res.send(updatedItem);
     } catch (error) {
