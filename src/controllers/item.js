@@ -5,7 +5,13 @@ const { Item } = require('../db');
 module.exports = {
   async list(req, res) {
     try {
-      const items = await Item.findAll();
+      const items = await Item.findAll({
+        where: {
+          OwnerId: {
+            [Sequelize.Op.ne]: res.locals.user,
+          }
+        }
+      });
       res.send(items);
     } catch (error) {
       res.status(403).send({ error });
@@ -14,7 +20,15 @@ module.exports = {
   async create(req, res) {
     try {
       const item = await Item.create(req.body);
-      res.send(item);
+      item.setOwner(res.locals.user.id);
+      const items = await Item.findAll({
+        where: {
+          OwnerId: {
+            [Sequelize.Op.ne]: res.locals.user,
+          }
+        }
+      });
+      res.send(items);
     } catch (error) {
       res.status(403).send({ error });
     }
