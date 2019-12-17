@@ -7,8 +7,8 @@ const message = require('./message');
 const review = require('./review');
 
 function router(app) {
-  app.use(item);
   app.use(user);
+  app.use(item);
   app.use(swap);
   app.use(message);
   app.use(review);

@@ -1,6 +1,8 @@
 'use strict';
 
 const { Item } = require('../db');
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 
 module.exports = {
   async list(req, res) {
@@ -8,12 +10,13 @@ module.exports = {
       const items = await Item.findAll({
         where: {
           OwnerId: {
-            [Sequelize.Op.ne]: res.locals.user,
+            [Op.ne]: parseInt(res.locals.user.id),
           }
         }
       });
       res.send(items);
     } catch (error) {
+      console.log(error);
       res.status(403).send({ error });
     }
   },
@@ -24,7 +27,7 @@ module.exports = {
       const items = await Item.findAll({
         where: {
           OwnerId: {
-            [Sequelize.Op.ne]: res.locals.user,
+            [Op.ne]: parseInt(res.locals.user.id),
           }
         }
       });

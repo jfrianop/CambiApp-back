@@ -11,7 +11,7 @@ module.exports = {
     }
 
     res.locals.user = jwt.verify(token, process.env.SECRET);
-
+    console.log("Request by: ", res.locals.user);
     next();
   },
 };

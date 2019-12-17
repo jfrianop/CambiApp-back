@@ -21,6 +21,6 @@ router(app);
 sequelize.sync();
 
 // this line resets all tables.
-sequelize.sync({ force: true });
+//sequelize.sync({ force: true });
 
 app.listen(port, () => console.log(`Server is now running on port http://localhost:${port}`));
